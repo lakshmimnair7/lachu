@@ -1,17 +1,17 @@
-const Properties= require('./models/Properties')
-const Product = require('./models/Product')
-const Category=require('./models/Category')
-const Manufacture = require('./models/Manufacturer')
+const Properties= require('./models/properties')
+const Product = require('./models/product')
+const Category=require('./models/categories')
+const Manufacture = require('./models/manufacture')
 
 
 const db = require('./connector')
 
 Product.hasOne(Properties)
 //Product.hasMany(Properties)
-Product.belongsTo(Category)
+Product.belongsTo(Categories)
 
 Product.belongsToMany(Manufacture,{
-    through:"Product_Manufacture",
+    through:"Product_Manufacturer",
     foreignKey:"product_id",
     otherKey:"manufacture_id",
     timestamp:"false"
@@ -19,7 +19,7 @@ Product.belongsToMany(Manufacture,{
 
 
 Manufacture.belongsToMany(Product,{
-    through:"Product_Manufacture",
+    through:"Product_Manufacturer",
     foreignKey:"manufacture_id",
     otherKey:"product_id",
     timestamp:"false"
